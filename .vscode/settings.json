@@ -1,0 +1,150 @@
+{
+  // File associations for spec kit
+  "files.associations": {
+    "*.spec.yml": "yaml",
+    "*.spec.yaml": "yaml",
+    "*.plan.yml": "yaml",
+    "*.plan.yaml": "yaml",
+    "*.task.yml": "yaml",
+    "*.task.yaml": "yaml",
+    "constitution.md": "markdown",
+    "spec-*.md": "markdown",
+    "plan-*.md": "markdown",
+    "task-*.md": "markdown"
+  },
+
+  // YAML language server configuration
+  "yaml.schemas": {
+    "https://spec-kit.github.io/schema/latest": [
+      "*.spec.yml",
+      "*.spec.yaml",
+      "specs/**/*.yml",
+      "specs/**/*.yaml"
+    ]
+  },
+
+  // Custom tags for spec kit YAML files
+  "yaml.customTags": [
+    "!spec-ref",
+    "!template",
+    "!include",
+    "!generate",
+    "!requirement",
+    "!task",
+    "!dependency",
+    "!constitution-ref"
+  ],
+
+  // Editor configuration for specification writing
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "editor.suggestSelection": "first",
+  "editor.wordBasedSuggestions": true,
+  "editor.snippetSuggestions": "bottom",
+  "editor.tabCompletion": "on",
+  
+  // Formatting preferences for spec files
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 120,
+  "editor.formatOnSave": true,
+  "[yaml]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[markdown]": {
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": false,
+      "strings": false,
+      "other": false
+    },
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+
+  // File exclusions to reduce noise
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/.pytest_cache": true,
+    "**/.venv": true,
+    "**/venv": true
+  },
+
+  // Search exclusions
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/build": true,
+    "**/dist": true,
+    "**/coverage": true
+  },
+
+  // Terminal configuration for spec kit commands
+  "terminal.integrated.env.osx": {
+    "SPEC_KIT_PATH": "${workspaceFolder}"
+  },
+  "terminal.integrated.env.linux": {
+    "SPEC_KIT_PATH": "${workspaceFolder}"
+  },
+  "terminal.integrated.env.windows": {
+    "SPEC_KIT_PATH": "${workspaceFolder}"
+  },
+
+  // Git configuration for spec kit workflow
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.branchPrefix": "spec/",
+
+  // Explorer configuration
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.spec.yml": "${capture}.plan.yml, ${capture}.task.yml, ${capture}.md",
+    "*.spec.yaml": "${capture}.plan.yaml, ${capture}.task.yaml, ${capture}.md"
+  },
+
+  // Problem matcher for spec kit validation
+  "problems.showCurrentInStatus": true,
+
+  // Auto-save for specifications
+  "files.autoSave": "onFocusChange",
+  
+  // Better markdown support
+  "markdown.validate.enabled": true,
+  "markdown.updateLinksOnFileMove.enabled": "always",
+  "markdown.preview.breaks": true,
+
+  // OpenAPI/Swagger configuration
+  "openapi.tryit": true,
+  "openapi.securityAudit": true,
+
+  // EchoAPI configuration
+  "echoapi.defaultWorkspace": "${workspaceFolder}/tests/api",
+  "echoapi.autoSave": true,
+  "echoapi.enableSync": false,
+  "echoapi.defaultEnvironment": "development",
+
+  // Draw.io configuration
+  "hediet.vscode-drawio.theme": "atlas",
+  "hediet.vscode-drawio.local-storage": "workspace",
+
+  // Copilot configuration for spec kit
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "markdown": true
+  }
+}

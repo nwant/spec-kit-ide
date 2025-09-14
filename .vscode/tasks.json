@@ -1,0 +1,267 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "spec-kit: Specify",
+      "type": "shell",
+      "command": "specify",
+      "args": ["${input:featureName}"],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "file-text",
+        "color": "terminal.ansiBlue"
+      }
+    },
+    {
+      "label": "spec-kit: Plan",
+      "type": "shell",
+      "command": "specify",
+      "args": ["--plan", "${input:specFile}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "problemMatcher": [],
+      "dependsOn": [],
+      "icon": {
+        "id": "checklist",
+        "color": "terminal.ansiGreen"
+      }
+    },
+    {
+      "label": "spec-kit: Tasks",
+      "type": "shell",
+      "command": "specify",
+      "args": ["--tasks", "${input:planFile}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "tasklist",
+        "color": "terminal.ansiYellow"
+      }
+    },
+    {
+      "label": "spec-kit: Full Workflow",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "spec-kit: Specify",
+        "spec-kit: Plan",
+        "spec-kit: Tasks"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "icon": {
+        "id": "rocket",
+        "color": "terminal.ansiMagenta"
+      }
+    },
+    {
+      "label": "spec-kit: Validate Specification",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "-m",
+        "spec_kit.validate",
+        "${file}"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "problems",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "problemMatcher": {
+        "owner": "spec-kit",
+        "pattern": {
+          "regexp": "^(.+):(\\d+):(\\d+):\\s+(error|warning):\\s+(.+)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      },
+      "icon": {
+        "id": "beaker",
+        "color": "terminal.ansiCyan"
+      }
+    },
+    {
+      "label": "spec-kit: Generate Code",
+      "type": "shell",
+      "command": "${input:aiAgent}",
+      "args": ["${input:generateArgs}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "showReuseMessage": false
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "code",
+        "color": "terminal.ansiRed"
+      }
+    },
+    {
+      "label": "spec-kit: Install Dependencies",
+      "type": "shell",
+      "command": "uv",
+      "args": ["pip", "install", "-e", ".", "--python", "3.11"],
+      "group": "none",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "desktop-download",
+        "color": "terminal.ansiWhite"
+      }
+    },
+    {
+      "label": "spec-kit: Create New Spec Number",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "mkdir -p specs && cd specs && printf '%03d\\n' $(ls -d [0-9][0-9][0-9] 2>/dev/null | tail -1 | sed 's/^0*//' | awk '{print $1+1}')"
+      ],
+      "group": "none",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "add",
+        "color": "terminal.ansiBlue"
+      }
+    },
+    {
+      "label": "spec-kit: Test API Specification",
+      "type": "shell",
+      "command": "echo",
+      "args": ["Open EchoAPI panel in VSCode to test APIs. Collections are saved in ${workspaceFolder}/tests/api/"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "zap",
+        "color": "terminal.ansiYellow"
+      }
+    },
+    {
+      "label": "spec-kit: Check Constitution Compliance",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "-m",
+        "spec_kit.check_constitution",
+        "--spec", "${file}",
+        "--constitution", "${workspaceFolder}/memory/constitution.md"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "problems",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "problemMatcher": {
+        "owner": "constitution",
+        "pattern": {
+          "regexp": "^(VIOLATION):\\s+(.+)\\s+at\\s+line\\s+(\\d+):\\s+(.+)$",
+          "severity": 1,
+          "message": 2,
+          "line": 3,
+          "code": 4
+        }
+      },
+      "icon": {
+        "id": "law",
+        "color": "terminal.ansiRed"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "featureName",
+      "type": "promptString",
+      "description": "Enter the feature name to specify",
+      "default": "new-feature"
+    },
+    {
+      "id": "specFile",
+      "type": "promptString",
+      "description": "Enter the specification file path",
+      "default": "specs/001/spec.yml"
+    },
+    {
+      "id": "planFile",
+      "type": "promptString",
+      "description": "Enter the plan file path",
+      "default": "specs/001/plan.yml"
+    },
+    {
+      "id": "aiAgent",
+      "type": "pickString",
+      "description": "Select the AI agent to use",
+      "options": [
+        "claude-code",
+        "github-copilot",
+        "cursor",
+        "gemini-cli",
+        "custom"
+      ],
+      "default": "claude-code"
+    },
+    {
+      "id": "generateArgs",
+      "type": "promptString",
+      "description": "Enter generation arguments",
+      "default": "--spec ${file}"
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug: Specify Command",
+      "type": "python",
+      "request": "launch",
+      "module": "spec_kit.cli",
+      "args": ["specify", "${input:featureToSpecify}"],
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}",
+        "SPEC_KIT_DEBUG": "true"
+      }
+    },
+    {
+      "name": "Debug: Plan Command",
+      "type": "python",
+      "request": "launch",
+      "module": "spec_kit.cli",
+      "args": ["plan", "--spec", "${input:specificationFile}"],
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}",
+        "SPEC_KIT_DEBUG": "true"
+      }
+    },
+    {
+      "name": "Debug: Tasks Command",
+      "type": "python",
+      "request": "launch",
+      "module": "spec_kit.cli",
+      "args": ["tasks", "--plan", "${input:planFile}"],
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}",
+        "SPEC_KIT_DEBUG": "true"
+      }
+    },
+    {
+      "name": "Debug: Validate Specification",
+      "type": "python",
+      "request": "launch",
+      "module": "spec_kit.validate",
+      "args": ["${file}"],
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Debug: Constitution Check",
+      "type": "python",
+      "request": "launch",
+      "module": "spec_kit.check_constitution",
+      "args": [
+        "--spec", "${file}",
+        "--constitution", "${workspaceFolder}/memory/constitution.md"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "Python: Attach to Process",
+      "type": "python",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": false
+    },
+    {
+      "name": "Debug: AI Agent Integration",
+      "type": "python",
+      "request": "launch",
+      "module": "spec_kit.agents.${input:agentModule}",
+      "args": ["--spec", "${file}"],
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}",
+        "SPEC_KIT_DEBUG": "true",
+        "AI_AGENT_VERBOSE": "true"
+      }
+    },
+    {
+      "name": "Run Tests",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "tests/",
+        "-v",
+        "--tb=short"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Debug: Extension Host",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/extensions/spec-kit-vscode"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/extensions/spec-kit-vscode/out/**/*.js"
+      ],
+      "preLaunchTask": "npm: watch"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "featureToSpecify",
+      "type": "promptString",
+      "description": "Feature name to specify",
+      "default": "authentication"
+    },
+    {
+      "id": "specificationFile",
+      "type": "promptString",
+      "description": "Path to specification file",
+      "default": "specs/001/spec.yml"
+    },
+    {
+      "id": "planFile",
+      "type": "promptString",
+      "description": "Path to plan file",
+      "default": "specs/001/plan.yml"
+    },
+    {
+      "id": "agentModule",
+      "type": "pickString",
+      "description": "Select AI agent module",
+      "options": [
+        "claude",
+        "copilot",
+        "gemini",
+        "cursor"
+      ],
+      "default": "claude"
+    }
+  ]
+}

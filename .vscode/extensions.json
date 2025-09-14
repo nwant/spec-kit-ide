@@ -1,0 +1,62 @@
+{
+  "recommendations": [
+    // Essential for spec kit development
+    "redhat.vscode-yaml",                  // YAML language support with schema validation
+    "42crunch.vscode-openapi",             // OpenAPI (Swagger) editor with rich features
+    "haok.echo-api",                      // API testing directly in VSCode with EchoAPI
+    "hediet.vscode-drawio",                // Architecture diagrams in VSCode
+    
+    // Markdown support for specifications
+    "yzhang.markdown-all-in-one",          // Enhanced markdown features
+    "davidanson.vscode-markdownlint",      // Markdown linting
+    "bierner.markdown-mermaid",            // Mermaid diagram support in markdown
+    "shd101wyy.markdown-preview-enhanced", // Better markdown preview
+    
+    // AI assistance
+    "github.copilot",                      // GitHub Copilot
+    "github.copilot-chat",                 // GitHub Copilot Chat
+    
+    // Git workflow
+    "eamodio.gitlens",                     // Advanced git features
+    "mhutchie.git-graph",                  // Visualize git history
+    
+    // Code quality
+    "streetsidesoftware.code-spell-checker", // Spell checking for specs
+    "gruntfuggly.todo-tree",              // Track TODOs and FIXMEs
+    "christian-kohler.path-intellisense",  // Path autocomplete
+    
+    // Python support (for spec kit CLI)
+    "ms-python.python",                    // Python language support
+    "ms-python.vscode-pylance",           // Python language server
+    "ms-python.black-formatter",           // Python code formatter
+    
+    // Terminal enhancements
+    "tyriar.terminal-tabs",               // Better terminal management
+    
+    // Project management
+    "alefragnani.project-manager",        // Manage multiple spec kit projects
+    "gruntfuggly.activitusbar",          // Customize activity bar
+    
+    // Productivity
+    "alefragnani.bookmarks",              // Bookmark important specs
+    "naumovs.color-highlight",           // Highlight colors in specs
+    "aaron-bond.better-comments",        // Annotate spec comments
+    
+    // Optional but useful
+    "humao.rest-client",                 // Alternative to EchoAPI
+    "janisdd.vscode-edit-csv",          // Edit CSV test data
+    "mechatroner.rainbow-csv",          // Visualize CSV files
+    "redhat.vscode-xml",                // XML support for some specs
+    "tamasfe.even-better-toml",         // TOML file support
+    
+    // Remote development (if needed)
+    "ms-vscode-remote.remote-containers", // Dev containers support
+    "ms-vscode-remote.remote-ssh"        // SSH development
+  ],
+  
+  "unwantedRecommendations": [
+    // Extensions that might interfere with spec kit workflow
+    "ritwickdey.liveserver",             // Can interfere with spec generation
+    "formulahendry.auto-rename-tag"      // Not needed for spec files
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "name": "spec-kit-ide",
+  "displayName": "Spec Kit IDE Tools",
+  "description": "Enhanced IDE support for GitHub Spec Kit - Spec-Driven Development with AI",
+  "version": "0.1.0",
+  "publisher": "spec-kit-community",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/spec-kit-ide"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Other"
+  ],
+  "keywords": [
+    "spec-kit",
+    "specification",
+    "spec-driven",
+    "ai",
+    "github",
+    "yaml",
+    "development",
+    "echoapi",
+    "api-testing"
+  ],
+  "contributes": {
+    "configuration": {
+      "title": "Spec Kit",
+      "properties": {
+        "specKit.pythonPath": {
+          "type": "string",
+          "default": "python3.11",
+          "description": "Path to Python interpreter for spec kit CLI"
+        },
+        "specKit.aiAgent": {
+          "type": "string",
+          "enum": [
+            "claude-code",
+            "github-copilot",
+            "cursor",
+            "gemini-cli"
+          ],
+          "default": "claude-code",
+          "description": "Default AI agent for code generation"
+        },
+        "specKit.validateOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Validate specifications on save"
+        },
+        "specKit.showProgressNotifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show notifications for spec kit operations"
+        }
+      }
+    },
+    "snippets": [
+      {
+        "language": "yaml",
+        "path": ".vscode/snippets/spec-kit.code-snippets"
+      },
+      {
+        "language": "markdown",
+        "path": ".vscode/snippets/spec-kit.code-snippets"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
